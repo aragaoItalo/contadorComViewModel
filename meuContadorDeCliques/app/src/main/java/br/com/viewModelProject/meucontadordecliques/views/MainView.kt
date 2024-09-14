@@ -1,47 +1,60 @@
-package br.com.viewModelProject.meucontadordecliques
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
-import br.com.viewModelProject.meucontadordecliques.ui.theme.MeuContadorDeCliquesTheme
-import br.com.viewModelProject.meucontadordecliques.views.MainView
-import br.com.viewModelProject.meucontadordecliques.views.MainView
-import br.com.viewModelProject.meucontadordecliques.views.MainViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.livedata.observeAsState
 
-class MainActivity : ComponentActivity() {
+@Composable
+fun MainView(modifier: Modifier = Modifier, viewModel: MainViewModel = viewModel()) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    val contador: Int? by viewModel.contador.observeAsState(initial = 0)
 
-        val viewModel: MainViewModel = MainViewModel()
+    Column(modifier = modifier) {
+        Text(text = "================")
+        Text(text = "================")
+        Text(text = "================")
+        Text(text = "================")
 
-        enableEdgetoEdge()
-        setContent {
-            MeuContadorDeCliquesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainView(modifier = Modifier.padding(innerPadding))
-                }
-            }
+        TextField(value = contador.toString(), onValueChange = {})
+
+        Button(onClick = {
+            viewModel.incrementaContador()
+         }) {
+            Text(text = contador.toString())
         }
     }
 }
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.livedata.observeAsState
 
 @Composable
-fun MainView(modifier: Modifier){
+fun MainView(modifier: Modifier = Modifier, viewModel: MainViewModel = viewModel()) {
 
+    val contador: Int? by viewModel.contador.observeAsState(initial = 0)
+
+    Column(modifier = modifier) {
+        Text(text = "================")
+        Text(text = "================")
+        Text(text = "================")
+        Text(text = "================")
+
+        TextField(value = contador.toString(), onValueChange = {})
+
+        Button(onClick = {
+            viewModel.incrementaContador()
+         }) {
+            Text(text = contador.toString())
+        }
+    }
 }
-
-fun enableEdgetoEdge() {
-    // TODO: Implement this method
-}
-
